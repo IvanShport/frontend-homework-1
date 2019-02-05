@@ -5,7 +5,7 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('яяя'), 'Яяя', 'Работает с русским алфавитом');
 		assert.strictEqual(sort('Бббббб'), 'Бббббб');
 		assert.strictEqual(sort('zzzzzz'), 'Zzzzzz', 'Работает с английским алфавитом');
-		assert.strictEqual(sort('Rrrrrrrr'), 'rrrrrrrr');
+		assert.strictEqual(sort('Rrrrrrrr'), 'Rrrrrrrr');
 	});
 
 	QUnit.test('Функция делает все буквы, кроме первой, строчными', function (assert) {
@@ -34,8 +34,22 @@ QUnit.module('Тестируем функцию sort', function () {
 
 	QUnit.test('Функция работает правильно', function (assert) {
 		assert.strictEqual(sort('мама мыла раму'), 'Аамм Алмы Амру');
-		assert.strictEqual(sort('космический корабль летит на марс'), 'Абклорь Амрс Aн Еиийккмоссч Еилтт');
+		assert.strictEqual(sort('космический корабль летит на марс'), 'Абклорь Амрс Ан Еиийккмоссч Еилтт');
 		assert.strictEqual(sort('i love frontend'), 'Defnnort Elov I');
 		assert.strictEqual(sort('hello world'), 'Dlorw Ehllo');
 	});
+
+    QUnit.test('Функция работает правильно с предлложениями с разным регистром', function (assert) {
+        assert.strictEqual(sort('маМа мЫлА раму'), 'Аамм Алмы Амру');
+        assert.strictEqual(sort('космиЧеский КорАБль летит на мАрС'), 'Абклорь Амрс Ан Еиийккмоссч Еилтт');
+        assert.strictEqual(sort('i LOve FroNteNd'), 'Defnnort Elov I');
+        assert.strictEqual(sort('Hello woRLD'), 'Dlorw Ehllo');
+    });
+
+    QUnit.test('Функция сортирует слова со знаками препинания', function (assert) {
+        assert.strictEqual(sort("«Да. Да! Да?! Да…»"), "!?ад !ад …»ад .«ад");
+        assert.strictEqual(sort("';.b/[aaa:)bb]aa(?."), ";:?..'()[]/aaaaabbb");
+    });
+
+
 });
