@@ -22,8 +22,3 @@ function sort(someString) {
         .sort(comp)
         .join(' ');
 }
-
-console.log(sort("маМа мЫлА раму"));
-console.log(sort('космиЧеский КорАБль летит на мАрС'));
-console.log(sort('i LOve FroNteNd'));
-console.log(sort('Hello woRLD'));
