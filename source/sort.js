@@ -1,24 +1,24 @@
 'use strict';
 
-const comp = (a, b) => {
-    let coll = new Intl.Collator();
-    return coll.compare(a, b);
-};
-
-const localSort = word => {
-    return word
-        .toLowerCase()
-        .split('')
-        .sort(comp)
-        .join('');
-};
+const coll = new Intl.Collator();
 
 function sort(someString) {
     return someString
         .toLowerCase()
         .split(' ')
         .map(localSort)
-        .map(word => word[0].toUpperCase() + word.slice(1))
-        .sort(comp)
+        .sort(coll.compare)
         .join(' ');
+}
+
+function localSort(word) {
+    const sortWord = [...(word
+        .toLowerCase())]
+        .sort(coll.compare)
+        .join('');
+
+    return sortWord
+            .charAt(0)
+            .toUpperCase()
+        + sortWord.slice(1);
 }

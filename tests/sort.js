@@ -51,5 +51,17 @@ QUnit.module('Тестируем функцию sort', function () {
         assert.strictEqual(sort("';.b/[aaa:)bb]aa(?."), ";:?..'()[]/aaaaabbb");
     });
 
+    QUnit.test('Функция сортирует слова, состояшие из пробелов', function (assert) {
+        assert.strictEqual(sort("      "), "      ");
+        assert.strictEqual(sort(""), "");
+        assert.strictEqual(sort("  Hello woRLD  "), "    Dlorw Ehllo");
+    });
+
+    QUnit.test('Функция сортирует слова, состояшие из не BMP символами', function (assert) {
+        assert.strictEqual(sort("𝟚𝟙𝟛sdfaa😎😜🙃"), "😎😜🙃𝟙𝟚𝟛aadfs");
+        assert.strictEqual(sort("𝟚😎😜🙃𝟚𝟙𝟛"), "😎😜🙃𝟙𝟚𝟚𝟛");
+        assert.strictEqual(sort("😜😎 𝟚🙃 𝟛𝟙"), "😎😜 🙃𝟚 𝟙𝟛");
+    });
+
 
 });
